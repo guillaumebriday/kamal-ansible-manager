@@ -1,0 +1,1 @@
+# kamal-ansible-manager
