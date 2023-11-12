@@ -1,0 +1,2 @@
+[webservers]
+<your-ip-address> ansible_become_method=su ansible_user=root

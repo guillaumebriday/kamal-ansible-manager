@@ -1,0 +1,81 @@
+---
+- name: Provisionning webservers group
+  hosts: webservers
+  tasks:
+    - name: Upgrade packages
+      apt:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Install packages
+      apt:
+        name:
+          - apt-transport-https
+          - build-essential
+          - curl
+          - fail2ban
+          - htop
+          - ntp
+          - ufw
+          - vim
+        state: latest
+        update_cache: yes
+        autoremove: yes
+        autoclean: yes
+      notify:
+        - start ntp
+        - start fail2ban
+
+    - name: Remove snap
+      apt:
+        name:
+          - snapd
+          - snap
+        state: absent
+        purge: true
+
+    - name: Configure ufw defaults
+      ufw:
+        direction: "{{ item.direction }}"
+        policy: "{{ item.policy }}"
+      loop:
+        - direction: incoming
+          policy: deny
+        - direction: outgoing
+          policy: allow
+
+    - name: Configure ufw rules
+      ufw:
+        rule: "{{ item.rule }}"
+        port: "{{ item.port }}"
+        proto: "{{ item.proto }}"
+      loop:
+        - rule: 'limit'
+          port: '22'
+          proto: 'tcp'
+        - rule: 'allow'
+          port: '80'
+          proto: 'tcp'
+        - rule: 'allow'
+          port: '443'
+          proto: 'tcp'
+        - rule: 'allow'
+          port: '21'
+          proto: 'tcp'
+
+    - name: Enable ufw
+      ufw:
+        state: enabled
+
+  handlers:
+    - name: start ntp
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+
+    - name: start fail2ban
+      service:
+        name: fail2ban
+        state: started
+        enabled: yes
