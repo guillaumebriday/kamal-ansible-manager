@@ -1,0 +1,11 @@
+---
+- name: Create traefik folder
+  file:
+    path: "/letsencrypt"
+    state: directory
+
+- name: Create traefik file
+  file:
+    path: "/letsencrypt/acme.json"
+    state: touch
+    mode: 0600
