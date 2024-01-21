@@ -24,7 +24,7 @@ Copy the inventory example file:
 $ cp hosts.ini.example hosts.ini
 ```
 
-Update the `<your-ip-address>` with your server's IP (you can have multiple servers):
+Update the `<host1>` with your server's IP address (you can have multiple servers):
 ```bash
 $ vim hosts.ini
 ```
