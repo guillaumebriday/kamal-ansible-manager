@@ -1,0 +1,32 @@
+---
+- name: Ensure old versions of Docker are not installed
+  package:
+    name:
+      - docker
+      - docker.io
+      - docker-engine
+    state: absent
+
+- name: Add Docker apt key
+  get_url:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    dest: /etc/apt/trusted.gpg.d/docker.asc
+    mode: 0644
+    force: false
+
+- name: Add Docker repository
+  apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+    filename: docker
+    update_cache: true
+
+- name: Install Docker packages
+  package:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+  notify:
+    - restart docker

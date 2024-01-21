@@ -1,0 +1,8 @@
+---
+- name: Remove snap
+  apt:
+    name:
+      - snapd
+      - snap
+    state: absent
+    purge: true

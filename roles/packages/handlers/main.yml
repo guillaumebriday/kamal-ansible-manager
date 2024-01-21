@@ -1,0 +1,12 @@
+---
+- name: start ntp
+  service:
+    name: ntp
+    state: started
+    enabled: yes
+
+- name: start fail2ban
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes
