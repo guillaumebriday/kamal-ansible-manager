@@ -18,6 +18,7 @@
           - htop
           - ntp
           - ufw
+          - unattended-upgrades
           - vim
         state: latest
         update_cache: yes
