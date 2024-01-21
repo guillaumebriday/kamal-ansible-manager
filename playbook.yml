@@ -1,6 +1,7 @@
 ---
 - name: Provisionning webservers group
   hosts: webservers
+  strategy: free
   tasks:
     - name: Upgrade packages
       apt:
