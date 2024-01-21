@@ -7,14 +7,24 @@
         update_cache: yes
         upgrade: yes
 
+    - name: Ensure old versions of Docker are not installed
+      package:
+        name:
+          - docker
+          - docker.io
+          - docker-engine
+        state: absent
+
     - name: Install packages
       apt:
         name:
           - apt-transport-https
           - build-essential
+          - ca-certificates
           - curl
           - fail2ban
           - git
+          - gnupg
           - htop
           - ntp
           - ufw
@@ -27,6 +37,30 @@
       notify:
         - start ntp
         - start fail2ban
+
+    - name: Add Docker apt key
+      get_url:
+        url: "https://download.docker.com/linux/ubuntu/gpg"
+        dest: /etc/apt/trusted.gpg.d/docker.asc
+        mode: 0644
+        force: false
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        state: present
+        filename: docker
+        update_cache: true
+
+    - name: Install Docker packages
+      package:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+      notify:
+        - restart docker
 
     - name: Remove snap
       apt:
@@ -122,3 +156,9 @@
       service:
         name: sshd
         state: restarted
+
+    - name: restart docker
+      service:
+        name: docker
+        state: restarted
+        enabled: yes
