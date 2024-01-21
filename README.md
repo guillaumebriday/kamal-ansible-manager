@@ -11,6 +11,11 @@ It will automatically update your packages and configure these packages to secur
 - [UFW](https://wiki.ubuntu.com/UncomplicatedFirewall)
 - [NTP](https://ubuntu.com/server/docs/network-ntp)
 
+The playbook also:
+- Remove [Snap](https://snapcraft.io/).
+- Disable ssh password login.
+- Create a `/letsencrypt/acme.json` file.
+
 ## Getting Started
 
 Clone the repo:
