@@ -8,9 +8,15 @@ It will automatically update your packages and configure these packages to secur
 
 - [Fail2ban](https://github.com/fail2ban/fail2ban)
 - [UFW](https://wiki.ubuntu.com/UncomplicatedFirewall)
-- [NTP](https://wiki.ubuntu.com/UncomplicatedFirewall)
+- [NTP](https://ubuntu.com/server/docs/network-ntp)
 
 ## Getting Started
+
+Clone the repo:
+```bash
+$ git clone git@github.com:guillaumebriday/kamal-ansible-manager.git
+$ cd kamal-ansible-manager
+```
 
 Copy the inventory example file:
 ```bash
