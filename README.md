@@ -31,7 +31,7 @@ $ vim hosts.ini
 
 Run the playbook:
 ```bash
-$ ansible-playbook -i hosts.ini playbook.yml
+$ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts.ini playbook.yml
 ```
 
 ## Contributing
