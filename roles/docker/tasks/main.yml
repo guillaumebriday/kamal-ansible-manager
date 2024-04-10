@@ -14,9 +14,9 @@
     mode: 0644
     force: false
 
-- name: Add Docker repository
+- name: Add Docker APT repository
   apt_repository:
-    repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    repo: deb [arch=amd64] https://download.docker.com/{{ ansible_system | lower }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
     state: present
     filename: docker
     update_cache: true
