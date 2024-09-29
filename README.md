@@ -14,7 +14,6 @@ It will automatically update your packages and configure these packages to secur
 The playbook also:
 - Remove [Snap](https://snapcraft.io/).
 - Disable ssh password login.
-- Create a `/letsencrypt/acme.json` file.
 
 ## Getting Started
 
