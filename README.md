@@ -28,23 +28,21 @@ cd kamal-ansible-manager
 Copy the example files:
 
 ```bash
-$ cp hosts.ini.example hosts.ini
+cp hosts.ini.example hosts.ini
+cp ansible.cfg.example ansible.cfg
 ```
 
-Update the `<host1>` with your server's IP address (you can have multiple servers):
-```bash
-$ vim hosts.ini
-```
+Update the `<host1>` in `hosts.ini` with your server's IP address (you can have multiple servers):
 
 Run the playbook:
 
 ```bash
-$ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts.ini playbook.yml
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts.ini playbook.yml
 ```
 
 ## Contributing
 
-Do not hesitate to contribute to the project by adapting or adding features ! Bug reports or pull requests are welcome.
+Do not hesitate to contribute to the project by adapting or adding features! Bug reports or pull requests are welcome.
 
 ## License
 
