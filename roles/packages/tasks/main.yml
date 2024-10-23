@@ -1,11 +1,12 @@
 ---
 - name: Upgrade packages
-  apt:
-    update_cache: yes
-    upgrade: yes
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: true
+  tags: pkg
 
 - name: Install packages
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - build-essential
@@ -20,9 +21,10 @@
       - unattended-upgrades
       - vim
     state: latest
-    update_cache: yes
-    autoremove: yes
-    autoclean: yes
+    update_cache: true
+    autoremove: true
+    autoclean: true
   notify:
     - start ntp
     - start fail2ban
+  tags: pkg

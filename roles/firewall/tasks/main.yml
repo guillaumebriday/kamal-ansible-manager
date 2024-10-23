@@ -1,6 +1,6 @@
 ---
 - name: Configure ufw defaults
-  ufw:
+  community.general.ufw:
     direction: "{{ item.direction }}"
     policy: "{{ item.policy }}"
   loop:
@@ -8,9 +8,10 @@
       policy: deny
     - direction: outgoing
       policy: allow
+  tags: firewall
 
 - name: Configure ufw rules
-  ufw:
+  community.general.ufw:
     rule: "{{ item.rule }}"
     port: "{{ item.port }}"
     proto: "{{ item.proto }}"
@@ -24,7 +25,9 @@
     - rule: 'allow'
       port: '443'
       proto: 'tcp'
+  tags: firewall
 
 - name: Enable ufw
-  ufw:
+  community.general.ufw:
     state: enabled
+  tags: firewall

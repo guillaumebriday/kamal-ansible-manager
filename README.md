@@ -12,18 +12,21 @@ It will automatically update your packages and configure these packages to secur
 - [NTP](https://ubuntu.com/server/docs/network-ntp)
 
 The playbook also:
-- Remove [Snap](https://snapcraft.io/).
-- Disable ssh password login.
+
+- Removes [Snap](https://snapcraft.io/).
+- Disables ssh password login.
 
 ## Getting Started
 
 Clone the repo:
+
 ```bash
-$ git clone git@github.com:guillaumebriday/kamal-ansible-manager.git
-$ cd kamal-ansible-manager
+git clone git@github.com:guillaumebriday/kamal-ansible-manager.git
+cd kamal-ansible-manager
 ```
 
-Copy the inventory example file:
+Copy the example files:
+
 ```bash
 $ cp hosts.ini.example hosts.ini
 ```
@@ -34,6 +37,7 @@ $ vim hosts.ini
 ```
 
 Run the playbook:
+
 ```bash
 $ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts.ini playbook.yml
 ```

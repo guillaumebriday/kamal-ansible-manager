@@ -1,0 +1,17 @@
+---
+profile: min # null, min, basic, moderate,safety, shared, production
+exclude_paths:
+  - .git/
+  - .github/
+  - .vscode/
+enable_list:
+  - fqcn-builtins  # opt-in
+warn_list:
+  - line-length
+  - yaml[line-length]
+skip_list:
+  - risky-file-permissions
+  - 'Command .* returned non-zero exit status 1'  # Generic pattern for all failed commands (cf. utf-8 errors)
+  - name[play]
+  - package-latest
+offline: true

@@ -1,6 +1,7 @@
 ---
-- name: Provisionning webservers group
+- name: Provisioning webservers group
   hosts: webservers
+  become: true
   strategy: free
   roles:
     - packages

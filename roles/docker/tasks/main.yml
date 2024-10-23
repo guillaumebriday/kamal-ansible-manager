@@ -1,28 +1,38 @@
 ---
 - name: Ensure old versions of Docker are not installed
-  package:
+  ansible.builtin.package:
     name:
       - docker
       - docker.io
       - docker-engine
     state: absent
+  tags: docker
 
-- name: Add Docker apt key
-  get_url:
+- name: Create directory for Docker GPG key
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+  tags: docker
+
+- name: Add Docker GPG apt key
+  ansible.builtin.get_url:
     url: "https://download.docker.com/linux/ubuntu/gpg"
-    dest: /etc/apt/trusted.gpg.d/docker.asc
-    mode: 0644
-    force: false
+    dest: /etc/apt/keyrings/docker.asc
+    mode: "0644"
+    force: true
+  tags: docker
 
 - name: Add Docker repository
-  apt_repository:
-    repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
     filename: docker
     update_cache: true
+  tags: docker
 
 - name: Install Docker packages
-  package:
+  ansible.builtin.package:
     name:
       - docker-ce
       - docker-ce-cli
@@ -30,3 +40,4 @@
     state: present
   notify:
     - restart docker
+  tags: docker
