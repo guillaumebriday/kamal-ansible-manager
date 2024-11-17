@@ -1,5 +1,5 @@
 ---
-- name: Provisionning webservers group
+- name: Provisioning webservers group
   hosts: webservers
   strategy: free
   roles:
