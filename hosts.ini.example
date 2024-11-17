@@ -1,2 +1,9 @@
+[all]
+localhost               ansible_connection=local
+
 [webservers]
-<host1> ansible_become_method=su ansible_user=root
+<host1>
+
+[all:vars]
+ansible_become_method=su
+ansible_user=root

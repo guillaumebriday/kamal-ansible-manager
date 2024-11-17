@@ -1,6 +1,6 @@
 ---
 - name: Update SSH configuration to be more secure
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "/etc/ssh/sshd_config"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
@@ -26,3 +26,4 @@
       line: "X11Forwarding no"
   notify:
     - restart ssh
+  tags: ssh
