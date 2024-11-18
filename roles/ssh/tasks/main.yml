@@ -1,28 +1,20 @@
 ---
 - name: Update SSH configuration to be more secure
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "/etc/ssh/sshd_config"
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
+    regexp: "^(#)?{{ item.key }}"
+    line: "{{ item.key }} {{ item.value }}"
     state: present
     validate: 'sshd -T -f %s'
-    mode: 0644
-  with_items:
-    - regexp: "^PasswordAuthentication"
-      line: "PasswordAuthentication no"
-    - regexp: "^PermitRootLogin"
-      line: "PermitRootLogin prohibit-password"
-    - regexp: "^Port"
-      line: "Port 22"
-    - regexp: "^UseDNS"
-      line: "UseDNS no"
-    - regexp: "^PermitEmptyPasswords"
-      line: "PermitEmptyPasswords no"
-    - regexp: "^ChallengeResponseAuthentication"
-      line: "ChallengeResponseAuthentication no"
-    - regexp: "^GSSAPIAuthentication"
-      line: "GSSAPIAuthentication no"
-    - regexp: "^X11Forwarding"
-      line: "X11Forwarding no"
+    mode: "0644"
+  loop:
+    - { key: "PasswordAuthentication", value: "no" }
+    - { key: "PermitRootLogin", value: "prohibit-password" }
+    - { key: "Port", value: "22" }
+    - { key: "UseDNS", value: "no" }
+    - { key: "PermitEmptyPasswords", value: "no" }
+    - { key: "ChallengeResponseAuthentication", value: "no" }
+    - { key: "GSSAPIAuthentication", value: "no" }
+    - { key: "X11Forwarding", value: "no" }
   notify:
-    - restart ssh
+    - Restart ssh
