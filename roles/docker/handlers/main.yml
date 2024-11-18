@@ -1,6 +1,6 @@
 ---
-- name: restart docker
-  service:
+- name: Restart docker
+  ansible.builtin.service:
     name: docker
     state: restarted
-    enabled: yes
+    enabled: true

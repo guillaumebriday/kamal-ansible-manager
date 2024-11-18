@@ -1,6 +1,6 @@
 ---
 - name: Configure ufw defaults
-  ufw:
+  community.general.ufw:
     direction: "{{ item.direction }}"
     policy: "{{ item.policy }}"
   loop:
@@ -10,7 +10,7 @@
       policy: allow
 
 - name: Configure ufw rules
-  ufw:
+  community.general.ufw:
     rule: "{{ item.rule }}"
     port: "{{ item.port }}"
     proto: "{{ item.proto }}"
@@ -26,5 +26,5 @@
       proto: 'tcp'
 
 - name: Enable ufw
-  ufw:
+  community.general.ufw:
     state: enabled
