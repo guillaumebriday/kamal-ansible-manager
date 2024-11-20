@@ -4,7 +4,7 @@ This is an [Ansible](https://www.ansible.com/) playbook to automatically optimiz
 
 Here's a quick video walkthrough of how this repo works:
 
-[![Watch the video](https://raw.githubusercontent.com/guillaumebriday/kamal-ansible-manager/main/thumbnail.jpg)](https://www.youtube.com/watch?v=WTYNPCEJSOo)
+[![Watch the video](https://raw.githubusercontent.com/guillaumebriday/kamal-ansible-manager/main/thumbnail.png)](https://www.youtube.com/watch?v=WTYNPCEJSOo)
 
 ## What's inside?
 
