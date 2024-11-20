@@ -1,2 +1,3 @@
 [webservers]
 <host1> ansible_become_method=su ansible_user=root
+<host2> ansible_become_method=su ansible_user=root
