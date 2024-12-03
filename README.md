@@ -43,6 +43,21 @@ Install the requirements:
 $ ansible-galaxy collection install -r requirements.yml
 ```
 
+## Configuring vars
+
+Variables can be configured in the `playbook.yml` file.
+Also, you can override default variables provided in [geerlingguy/ansible-role-swap](https://github.com/geerlingguy/ansible-role-swap/blob/master/defaults/main.yml) to adjust the swap settings.
+
+For instance:
+```yml
+  vars:
+    security_autoupdate_reboot: "true"
+    security_autoupdate_reboot_time: "03:00"
+    swap_file_size_mb: '1024'
+```
+
+## Running the playbook
+
 Run the playbook:
 ```bash
 $ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts.ini playbook.yml

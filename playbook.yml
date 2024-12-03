@@ -2,9 +2,14 @@
 - name: Provisioning webservers group
   hosts: webservers
   strategy: free
+  vars:
+    # Whether to reboot when needed during unattended upgrades.
+    security_autoupdate_reboot: "false"
+    # The time to trigger a reboot, when needed, if security_autoupdate_reboot is set to true. In 24h "hh:mm" clock format.
+    security_autoupdate_reboot_time: "03:00"
   roles:
     - packages
     - docker
     - firewall
-    - ssh
+    - security
     - geerlingguy.swap

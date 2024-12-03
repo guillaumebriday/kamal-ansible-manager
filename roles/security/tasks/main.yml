@@ -18,3 +18,15 @@
     - { key: "X11Forwarding", value: "no" }
   notify:
     - Restart ssh
+
+- name: Update unattended-upgrades configuration to be more secure
+  ansible.builtin.lineinfile:
+    dest: "/etc/apt/apt.conf.d/50unattended-upgrades"
+    regexp: "^(\/\/)?{{ item.key }} "
+    line: "{{ item.key }} \"{{ item.value }}\";"
+    state: present
+    mode: "0644"
+  loop:
+    - { key: "Unattended-Upgrade::Automatic-Reboot", value: "{{ security_autoupdate_reboot }}" }
+    - { key: "Unattended-Upgrade::Automatic-Reboot-Time", value: "{{ security_autoupdate_reboot_time }}" }
+  when: security_autoupdate_reboot == "true"
