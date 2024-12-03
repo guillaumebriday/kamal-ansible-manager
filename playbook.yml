@@ -7,3 +7,4 @@
     - docker
     - firewall
     - ssh
+    - geerlingguy.swap

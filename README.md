@@ -18,6 +18,7 @@ It will automatically update your packages and configure these packages to secur
 The playbook also:
 - Remove [Snap](https://snapcraft.io/).
 - Disable ssh password login.
+- Configure `swap` using [geerlingguy/ansible-role-swap](https://github.com/geerlingguy/ansible-role-swap).
 
 ## Getting Started
 
@@ -35,6 +36,11 @@ $ cp hosts.ini.example hosts.ini
 Update the `<host1>` with your server's IP address (you can have multiple servers):
 ```bash
 $ vim hosts.ini
+```
+
+Install the requirements:
+```bash
+$ ansible-galaxy collection install -r requirements.yml
 ```
 
 Run the playbook:
