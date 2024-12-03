@@ -1,4 +1,16 @@
 ---
+- name: Ensure apt key is not present in trusted.gpg.d
+  ansible.builtin.file:
+    path: /etc/apt/trusted.gpg.d/docker.asc
+    state: absent
+
+- name: Ensure the repo referencing the previous trusted.gpg.d key is not present
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: absent
+    filename: "docker"
+    update_cache: true
+
 - name: Upgrade packages
   ansible.builtin.apt:
     update_cache: true
