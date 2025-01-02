@@ -1,0 +1,38 @@
+---
+- name: Create Scaleway compute instances
+  community.general.scaleway_compute:
+    api_token: "{{ scaleway_api_token }}"
+    organization: "{{ scaleway_organization }}"
+    image: "{{ scaleway_image }}"
+    commercial_type: "{{ scaleway_commercial_type }}"
+    region: "{{ scaleway_region }}"
+    public_ip: "{{ scaleway_public_ip }}"
+    state: "{{ scaleway_state }}"
+    name: "{{ item }}"
+    wait: true
+  loop: "{{ scaleway_instances }}"
+
+- name: Gather Scaleway servers information
+  community.general.scaleway_server_info:
+    region: "{{ scaleway_region }}"
+    api_token: "{{ scaleway_api_token }}"
+  register: server_info
+
+- name: Extract public IP addresses into a new variable
+  ansible.builtin.set_fact:
+    instances_public_ips: >-
+      {{
+        server_info.scaleway_server_info
+        | json_query('[].{name: name, ip: public_ip.address}')
+        | selectattr('name', 'in', scaleway_instances)
+        | json_query('[].ip')
+        | list
+      }}
+
+- name: Add these IPs as dynamic hosts in an inventory group
+  ansible.builtin.add_host:
+    name: "{{ item }}"
+    groups: "webservers"
+    ansible_become_method: su
+    ansible_user: root
+  loop: "{{ instances_public_ips }}"

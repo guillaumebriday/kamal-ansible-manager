@@ -1,0 +1,9 @@
+---
+- name: Provisioning Scaleway computes instances
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - scaleway
+
+- name: Import the playbook
+  ansible.builtin.import_playbook: playbook.yml

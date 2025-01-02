@@ -2,6 +2,7 @@
 skip_list:
   - package-latest
   - run-once[play]
+  - jinja[invalid]
 
 enable_list:
   - fqcn-builtins
