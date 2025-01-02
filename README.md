@@ -63,6 +63,22 @@ Run the playbook:
 $ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts.ini playbook.yml
 ```
 
+## Provisioning Servers with Scaleway (Optional)
+
+If you want to automatically create new compute instances on Scaleway, you can use the [community.general.scaleway_compute module](https://docs.ansible.com/ansible/latest/collections/community/general/scaleway_compute_module.html). Follow these steps:
+
+Copy the example variables file and adjust the variables as needed:
+```bash
+$ cp roles/scaleway/vars/main.yml.example roles/scaleway/vars/main.yml
+```
+
+Run the playbook:
+```bash
+$ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook scaleway.yml
+```
+
+Then, it will continue the provisioning process on the newly created servers.
+
 ## Contributing
 
 Do not hesitate to contribute to the project by adapting or adding features ! Bug reports or pull requests are welcome.

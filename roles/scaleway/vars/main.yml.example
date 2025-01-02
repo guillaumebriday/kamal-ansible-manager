@@ -1,0 +1,11 @@
+---
+scaleway_image: ""
+scaleway_organization: ""
+scaleway_api_token: ""
+scaleway_commercial_type: "DEV1-S"
+scaleway_region: "par1"
+scaleway_public_ip: "dynamic"
+scaleway_state: "running"
+scaleway_instances:
+  - app-1
+  - worker-1

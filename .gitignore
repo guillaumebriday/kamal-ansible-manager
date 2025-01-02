@@ -1,1 +1,2 @@
 hosts.ini
+roles/scaleway/vars/main.yml
