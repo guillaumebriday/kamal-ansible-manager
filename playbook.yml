@@ -14,3 +14,4 @@
     - firewall
     - security
     - geerlingguy.swap
+    - reboot_if_needed
