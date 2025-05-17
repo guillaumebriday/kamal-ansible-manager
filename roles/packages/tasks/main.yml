@@ -23,6 +23,7 @@
       - build-essential
       - ca-certificates
       - curl
+      - duf
       - fail2ban
       - git
       - gnupg
