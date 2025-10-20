@@ -1,2 +1,25 @@
 hosts.ini
 roles/scaleway/vars/main.yml
+
+# Ansible
+.ansible/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Mise
+.mise.local.toml
+.mise.*.local.toml
+
+# Claude
+.claude/settings.local.json
+
+# Environment
+.env
+.env.local
+
+# EditorConfig
+.editorconfig-checker.json

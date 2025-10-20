@@ -1,0 +1,13 @@
+repos:
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 3.0.3
+    hooks:
+      - id: editorconfig-checker
+        alias: ec
+        exclude: ^(\.git/|\.venv/|\.mise/|\.ansible/)
+
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v25.9.2
+    hooks:
+      - id: ansible-lint
+        args: ["--profile", "production"]

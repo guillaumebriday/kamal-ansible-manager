@@ -28,6 +28,8 @@ $ git clone git@github.com:guillaumebriday/kamal-ansible-manager.git
 $ cd kamal-ansible-manager
 ```
 
+Development setup with [mise](https://mise.jdx.dev/): Run `mise install && mise run setup` for Python, Ansible, and linting tools.
+
 Copy the inventory example file:
 ```bash
 $ cp hosts.ini.example hosts.ini

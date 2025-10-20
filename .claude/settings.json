@@ -1,0 +1,16 @@
+{
+  "PostToolUse": [
+    {
+      "matcher": {
+        "tools": ["Edit", "Write"]
+      },
+      "hooks": [
+        {
+          "type": "command",
+          "command": "ansible-lint --profile production {file_path}"
+        }
+      ]
+    }
+  ],
+  "blockedCommands": ["git commit --no-verify", "git commit -n"]
+}

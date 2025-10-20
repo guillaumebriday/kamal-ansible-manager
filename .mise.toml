@@ -1,0 +1,43 @@
+[tools]
+python = "3.13.1"
+pipx = "latest"
+"pipx:ansible-core" = "latest"
+"pipx:ansible-lint" = "latest"
+editorconfig-checker = "3.4.1"
+
+[env]
+_.python.venv = { path = ".venv", create = true }
+VIRTUAL_ENV = "{{env.PWD}}/.venv"
+PATH = "{{env.PWD}}/.venv/bin:{{env.PATH}}"
+
+[tasks.install]
+description = "Install project dependencies"
+run = """
+  ansible-galaxy install -r requirements.yml
+  ansible-galaxy collection install ansible.posix community.general
+"""
+
+[tasks.lint]
+description = "Lint all Ansible files"
+run = "ansible-lint --profile production"
+
+[tasks.lint-file]
+description = "Lint a specific file"
+run = "ansible-lint --profile production {{arg(file)}}"
+
+[tasks.setup]
+description = "Initial project setup"
+depends = ["install"]
+run = "echo 'Setup complete! Virtual environment activated at .venv'"
+
+[tasks.test]
+description = "Run ansible syntax check"
+run = "ansible-playbook playbook.yml --syntax-check"
+
+[tasks.format-check]
+description = "Check editorconfig compliance"
+run = "ec"
+
+[tasks.check]
+description = "Run all checks"
+depends = ["lint", "test", "format-check"]
