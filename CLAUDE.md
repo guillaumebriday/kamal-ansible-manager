@@ -32,7 +32,7 @@ Two entry-point playbooks:
   1. `wait_for_connection` — waits for SSH, then runs `setup` to gather facts.
   2. `packages` — apt upgrade + install base packages (fail2ban, ufw, chrony, duf, htop, unattended-upgrades, etc.); removes snap; cleans up a legacy Docker apt key/repo from `trusted.gpg.d`. fail2ban and chrony are started via handlers.
   3. `docker` — installs Docker CE from Docker's official apt repo.
-  4. `firewall` — UFW: deny incoming / allow outgoing, limit 22, allow 80/443.
+  4. `firewall` — UFW: deny incoming / allow outgoing, allow 22/80/443. Port 22 is deliberately `allow` and not `limit`: ufw's rate limit drops an IP after 6 connections in 30s, which Kamal exceeds on every deploy and which surfaces as an SSH timeout. SSH is protected by fail2ban (`packages`) and key-only auth (`security`) instead.
   5. `security` — hardens `sshd_config` (disables password login, root password login) and configures unattended-upgrades auto-reboot.
   6. `geerlingguy.swap` — external role (from `requirements.yml`) that configures swap.
   7. `reboot_if_needed` — reboots if `/var/run/reboot-required` exists.

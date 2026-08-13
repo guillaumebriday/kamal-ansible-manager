@@ -15,7 +15,7 @@
     port: "{{ item.port }}"
     proto: "{{ item.proto }}"
   loop:
-    - rule: 'limit'
+    - rule: 'allow'
       port: '22'
       proto: 'tcp'
     - rule: 'allow'
