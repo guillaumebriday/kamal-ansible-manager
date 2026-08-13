@@ -1,6 +1,7 @@
 ---
 collections:
   - community.general
+  - ansible.posix
 
 roles:
   - name: geerlingguy.swap
